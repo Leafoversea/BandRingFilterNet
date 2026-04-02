@@ -1,0 +1,8 @@
+{
+  "best_epoch": 395,
+  "val_acc_raw": 98.53971962616822,
+  "val_acc_cal": 98.89018691588785,
+  "test_acc_raw": 98.56767027185033,
+  "test_acc_cal": 98.88921368021046,
+  "save_dir": "./run_main_only_no_gate_cs_1_2"
+}
