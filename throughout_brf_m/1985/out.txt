@@ -1,0 +1,13 @@
+(torch_latest) mingo@DESKTOP-UO4CLDO:~/work/PyCharmMiscProject$ nano MAX_THR9.py
+(torch_latest) mingo@DESKTOP-UO4CLDO:~/work/PyCharmMiscProject$ python MAX_THR9.py
+
+===== THROUGHPUT RESULT =====
+variant           : chlast_cache_fused_compile=none_manual_cudagraph
+precision         : fp16
+batch             : 2048
+img size          : 224
+throughput img/s  : 1984.95
+mean ms / batch   : 1031.764
+mean ms / image   : 0.503791
+peak mem MB       : 1264.8
+saved json        : /home/mingo/work/PyCharmMiscProject/thr_2048_224_opt_result.json
