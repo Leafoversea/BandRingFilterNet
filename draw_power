@@ -1,0 +1,321 @@
+import re
+import math
+import numpy as np
+import torch
+import matplotlib.pyplot as plt
+from matplotlib.colors import FuncNorm
+
+# ================== USER CONFIG ==================
+CKPT = r"C:\Users\kangk\Desktop\exp_c100_ring_rfft2_param_ens_beta\best_ensemble.pt"
+WHICH = "model"   # "model" / "ema" / "swa"
+OUT_PNG = "./rings_radial_heatmap_true_outer_geometry.png"
+OUT_PDF = "./rings_radial_heatmap_true_outer_geometry.pdf"
+
+# (stage_name, depth, channels, res)
+STAGES = [
+    ("stage1", 3, 32, 32),
+    ("stage2", 6, 48, 16),
+    ("stage3", 8, 64, 8),
+    ("stage4", 3, 80, 4),
+]
+
+# 这里决定你想画 equal-area 还是 linear
+# 如果你后面统一论文口径认为 BRFNet-T 应该是 linear，只改这一行即可
+EDGE_MODE = "area"   # "area" / "linear"
+
+# 显示画布大小（只是显示分辨率，不改变几何定义）
+CANVAS = 256
+CMAP = "inferno"
+
+# ====== COLOR RANGE ======
+AUTO_COLOR_RANGE = True
+AUTO_VMAX_PERCENTILE = 99.0
+MANUAL_VMIN = 0.0
+MANUAL_VMAX = 0.02
+ASINH_A = 18.0
+
+# ====== FIGURE STYLE ======
+FIG_W_SCALE = 2.35
+FIG_H_SCALE = 2.35
+FIG_W_PAD   = 2.20
+FIG_H_PAD   = 2.20
+
+TITLE_FS       = 30
+FORMULA_FS     = 20
+SUBTITLE_FS    = 17
+CB_LABEL_FS    = 16
+CB_TICK_FS     = 15
+
+TITLE_PAD      = 8
+SAVE_DPI       = 480
+# ===================================
+
+EPS = 1e-12
+
+plt.rcParams["font.weight"] = "bold"
+plt.rcParams["axes.titleweight"] = "bold"
+plt.rcParams["axes.labelweight"] = "bold"
+
+
+def get_sd(path, which):
+    ckpt = torch.load(path, map_location="cpu")
+    sd = ckpt[which]
+    out = {}
+    for k, v in sd.items():
+        if torch.is_tensor(v):
+            if k.startswith("module."):
+                k = k[len("module."):]
+            out[k] = v.float()
+    return out
+
+
+def pick(sd, key):
+    v = sd.get(key, None)
+    return v if (v is not None and torch.is_tensor(v)) else None
+
+
+def find_block_ids(sd, stage):
+    pat = re.compile(rf"^{stage}\.blocks\.(\d+)\.")
+    return sorted({int(m.group(1)) for k in sd.keys() if (m := pat.match(k))})
+
+
+def band_power_from_amp_cb(amp_cb):
+    # p_b = mean_c(|alpha_{c,b}|^2)
+    return (amp_cb.abs() ** 2).mean(dim=0)
+
+
+def block_amp_eff(sd, stage, blk):
+    """
+    与真实 forward 对齐：
+        A = shared_amp * (1 + s_amp)
+
+    这里故意不折叠 beta_a / gamma_a，
+    因为主图按 amplitude band energy 的口径来画。
+    """
+    shared = pick(sd, f"{stage}.blocks.{blk}.shared.amp")
+    if shared is None:
+        shared = pick(sd, f"{stage}.shared.amp")
+    if shared is None:
+        return None
+
+    s_amp = pick(sd, f"{stage}.blocks.{blk}.s_amp")
+    if s_amp is None:
+        return shared
+
+    return shared * (1.0 + s_amp)
+
+
+def build_asinh_norm(vmin, vmax, A):
+    def forward(x):
+        x = np.clip(x, vmin, vmax)
+        t = (x - vmin) / (vmax - vmin + 1e-12)
+        return np.arcsinh(A * t) / np.arcsinh(A)
+
+    def inverse(y):
+        t = np.sinh(y * np.arcsinh(A)) / A
+        return vmin + t * (vmax - vmin)
+
+    return FuncNorm((forward, inverse), vmin=vmin, vmax=vmax)
+
+
+def choose_display_range(all_band_values):
+    arr = np.asarray(all_band_values, dtype=np.float64)
+    arr = arr[np.isfinite(arr)]
+
+    vmin = float(MANUAL_VMIN)
+    if AUTO_COLOR_RANGE:
+        vmax = float(np.percentile(arr, AUTO_VMAX_PERCENTILE))
+        vmax = max(vmax, 1e-6)
+    else:
+        vmax = float(MANUAL_VMAX)
+
+    return vmin, vmax
+
+
+def make_colorbar_ticks(vmin, vmax):
+    return [vmin, vmax * 0.50, vmax * 0.75, vmax]
+
+
+def expand_band_to_2d_true_outer_geometry(band_b, res, canvas, edge_mode="area"):
+    """
+    几何真实映射版本（环状刷色，不是 pointwise）：
+
+    - 显示域是一个 res x res 对应的正方形
+    - 圆心在正方形中心
+    - 最大半径取到方框角点：
+          r_max = sqrt((res/2)^2 + (res/2)^2)
+      也就是“外接”逻辑，而不是“内切圆”逻辑
+    - EDGE_MODE='area' 时：
+          edges = r_max * sqrt(linspace(0,1,B+1))
+    - EDGE_MODE='linear' 时：
+          edges = linspace(0,r_max,B+1)
+
+    这张图仍然是连续显示热图，但其环带边界几何已与真实代码口径对齐。
+    """
+    band_b = torch.as_tensor(band_b, dtype=torch.float32).reshape(-1)
+    B = int(band_b.numel())
+
+    # 用真实 stage 分辨率决定显示坐标范围
+    half = float(res) / 2.0
+    xs = torch.linspace(-half, half, canvas)
+    ys = torch.linspace(-half, half, canvas)
+    yy, xx = torch.meshgrid(ys, xs, indexing="ij")
+
+    rr = torch.sqrt(xx ** 2 + yy ** 2)
+
+    # 外接方框的最大半径：到角点
+    r_max = math.sqrt(half * half + half * half)
+
+    edge_mode = str(edge_mode).lower()
+    if edge_mode == "area":
+        edges = torch.tensor(r_max, dtype=torch.float32) * torch.sqrt(
+            torch.linspace(0.0, 1.0, B + 1)
+        )
+    elif edge_mode == "linear":
+        edges = torch.linspace(0.0, r_max, B + 1)
+    else:
+        raise ValueError(f"Unknown edge_mode={edge_mode}")
+
+    idx = torch.bucketize(rr.reshape(-1), edges[1:-1], right=False).reshape(canvas, canvas)
+    img = band_b[idx].numpy().astype(np.float64)
+
+    return img, edges.numpy()
+
+
+def main():
+    sd = get_sd(CKPT, WHICH)
+
+    nrows = len(STAGES)
+    ncols = max(d for _, d, _, _ in STAGES)
+
+    ring_maps = {}
+    band_stats = {}
+    all_band_values = {}
+    display_values = []
+
+    for stage, depth, Cexp, res in STAGES:
+        blk_ids = find_block_ids(sd, stage)
+        if len(blk_ids) == 0:
+            blk_ids = list(range(depth))
+
+        for blk in range(depth):
+            amp_eff = block_amp_eff(sd, stage, blk)
+            if amp_eff is None:
+                continue
+
+            C, B = amp_eff.shape
+            band_pow = band_power_from_amp_cb(amp_eff).numpy().astype(np.float64)
+            display_values.extend(band_pow.tolist())
+
+            ring2d, edges = expand_band_to_2d_true_outer_geometry(
+                band_pow,
+                res=res,
+                canvas=CANVAS,
+                edge_mode=EDGE_MODE,
+            )
+
+            ring_maps[(stage, blk)] = ring2d
+            band_stats[(stage, blk)] = (band_pow, C, B, edges)
+
+    vmin, vmax = choose_display_range(display_values)
+    cb_ticks = make_colorbar_ticks(vmin, vmax)
+
+    norm = build_asinh_norm(vmin, vmax, ASINH_A)
+    cmap = plt.get_cmap(CMAP)
+
+    print(f"[Display range] vmin={vmin:.6f}, vmax={vmax:.6f}")
+    print(f"[Geometry mode] EDGE_MODE={EDGE_MODE}  (outer/corner-based mapping)")
+
+    fig, axes = plt.subplots(
+        nrows, ncols,
+        figsize=(FIG_W_SCALE * ncols + FIG_W_PAD, FIG_H_SCALE * nrows + FIG_H_PAD)
+    )
+    axes = np.atleast_2d(axes)
+
+    for r in range(nrows):
+        for c in range(ncols):
+            axes[r, c].axis("off")
+
+    mappable = None
+    for r, (stage, depth, Cexp, res) in enumerate(STAGES):
+        offset = (ncols - depth) // 2
+        for i in range(depth):
+            c = offset + i
+            ax = axes[r, c]
+            ax.axis("off")
+
+            key = (stage, i)
+            if key not in ring_maps:
+                ax.set_title(
+                    f"{stage} b{i}",
+                    fontsize=SUBTITLE_FS,
+                    pad=TITLE_PAD,
+                    fontweight="bold"
+                )
+                continue
+
+            img = ring_maps[key]
+            mappable = ax.imshow(
+                img,
+                cmap=cmap,
+                norm=norm,
+                interpolation="nearest",
+                origin="lower",
+            )
+
+            ax.set_title(
+                f"{stage}  C={Cexp}  b{i}",
+                fontsize=SUBTITLE_FS,
+                pad=TITLE_PAD,
+                fontweight="bold"
+            )
+
+    title_line1 = "Band Energy Heatmaps of BRFNet-T"
+    title_line2 = r"$p_b=\frac{1}{C}\sum_{c=1}^{C}\left|\alpha_{c,b}\right|^2$"
+
+    fig.text(
+        0.5, 0.978, title_line1,
+        ha="center", va="top",
+        fontsize=TITLE_FS, fontweight="bold"
+    )
+    fig.text(
+        0.5, 0.938, title_line2,
+        ha="center", va="top",
+        fontsize=FORMULA_FS
+    )
+
+    fig.tight_layout(rect=[0.02, 0.18, 0.98, 0.84])
+
+    if mappable is not None:
+        cax = fig.add_axes([0.14, 0.07, 0.72, 0.050])
+        cbar = fig.colorbar(mappable, cax=cax, orientation="horizontal")
+        cbar.set_label(
+            f"power $p_b$  (display emphasizes 0~{vmax:.3f})",
+            fontsize=CB_LABEL_FS,
+            fontweight="bold"
+        )
+        cbar.set_ticks(cb_ticks)
+        cbar.ax.set_xticklabels([f"{t:.3f}" for t in cb_ticks])
+        cbar.ax.tick_params(labelsize=CB_TICK_FS)
+        for lab in cbar.ax.get_xticklabels():
+            lab.set_fontweight("bold")
+
+    fig.savefig(OUT_PNG, dpi=SAVE_DPI, bbox_inches="tight", pad_inches=0.05)
+    fig.savefig(OUT_PDF, bbox_inches="tight", pad_inches=0.05)
+    plt.close(fig)
+
+    print("Saved:", OUT_PNG)
+    print("Saved:", OUT_PDF)
+
+    print("\n[Sanity] per-block band power max (raw):")
+    for stage, depth, _, _ in STAGES:
+        for blk in range(depth):
+            k = (stage, blk)
+            if k in band_stats:
+                bp, C, B, edges = band_stats[k]
+                print(f"  {stage}.b{blk}: B={B} max={bp.max():.4e} argmax={int(np.argmax(bp))}")
+                print(f"    edges = {np.round(edges, 4)}")
+
+
+if __name__ == "__main__":
+    main()
