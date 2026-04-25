@@ -5,7 +5,7 @@ import torch
 import matplotlib.pyplot as plt
 from matplotlib.colors import FuncNorm
 
-# ================== USER CONFIG ==================
+
 CKPT = r"C:\Users\kangk\Desktop\exp_c100_ring_rfft2_param_ens_beta\best_ensemble.pt"
 WHICH = "model"   # "model" / "ema" / "swa"
 OUT_PNG = "./rings_radial_heatmap_true_outer_geometry.png"
@@ -19,15 +19,12 @@ STAGES = [
     ("stage4", 3, 80, 4),
 ]
 
-# 这里决定你想画 equal-area 还是 linear
-# 如果你后面统一论文口径认为 BRFNet-T 应该是 linear，只改这一行即可
+
 EDGE_MODE = "area"   # "area" / "linear"
 
-# 显示画布大小（只是显示分辨率，不改变几何定义）
 CANVAS = 256
 CMAP = "inferno"
 
-# ====== COLOR RANGE ======
 AUTO_COLOR_RANGE = True
 AUTO_VMAX_PERCENTILE = 99.0
 MANUAL_VMIN = 0.0
@@ -48,7 +45,6 @@ CB_TICK_FS     = 15
 
 TITLE_PAD      = 8
 SAVE_DPI       = 480
-# ===================================
 
 EPS = 1e-12
 
@@ -89,9 +85,8 @@ def block_amp_eff(sd, stage, blk):
     与真实 forward 对齐：
         A = shared_amp * (1 + s_amp)
 
-    这里故意不折叠 beta_a / gamma_a，
-    因为主图按 amplitude band energy 的口径来画。
-    """
+
+
     shared = pick(sd, f"{stage}.blocks.{blk}.shared.amp")
     if shared is None:
         shared = pick(sd, f"{stage}.shared.amp")
@@ -137,21 +132,7 @@ def make_colorbar_ticks(vmin, vmax):
 
 
 def expand_band_to_2d_true_outer_geometry(band_b, res, canvas, edge_mode="area"):
-    """
-    几何真实映射版本（环状刷色，不是 pointwise）：
 
-    - 显示域是一个 res x res 对应的正方形
-    - 圆心在正方形中心
-    - 最大半径取到方框角点：
-          r_max = sqrt((res/2)^2 + (res/2)^2)
-      也就是“外接”逻辑，而不是“内切圆”逻辑
-    - EDGE_MODE='area' 时：
-          edges = r_max * sqrt(linspace(0,1,B+1))
-    - EDGE_MODE='linear' 时：
-          edges = linspace(0,r_max,B+1)
-
-    这张图仍然是连续显示热图，但其环带边界几何已与真实代码口径对齐。
-    """
     band_b = torch.as_tensor(band_b, dtype=torch.float32).reshape(-1)
     B = int(band_b.numel())
 
@@ -163,7 +144,7 @@ def expand_band_to_2d_true_outer_geometry(band_b, res, canvas, edge_mode="area")
 
     rr = torch.sqrt(xx ** 2 + yy ** 2)
 
-    # 外接方框的最大半径：到角点
+
     r_max = math.sqrt(half * half + half * half)
 
     edge_mode = str(edge_mode).lower()
