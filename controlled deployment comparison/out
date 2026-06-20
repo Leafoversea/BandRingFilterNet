@@ -1,0 +1,412 @@
+(pytorch_env) PS C:\Users\kangk\PycharmProjects\PythonProject4> python test.py --choice 1
+
+========== RUN GFNet-style point-wise repeat0 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_pointwise_seed0\deploy_model_best_swa_acc82.1200.pt
+RESULT_JSON {"Method": "GFNet-style point-wise", "Repeat": 0, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 1.033573, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 14.48051953125, "Peak GPU Mem bs=1 (MB)": 15.5791015625, "GPU Latency bs=2048 (ms/img)": 0.2898119354248047, "GPU Batch Latency bs=2048 (ms/batch)": 593.53484375, "GPU Throughput bs=2048 (img/s)": 3450.5135150289984, "Spectral Filter Params": 234112, "Filter Storage (KB, FP32)": 914.5, "Coeff. Access Pattern": "one coefficient per channel-frequency point", "Trainable spectral real scalars": 234112, "Trainable filter storage FP32 (KB)": 914.5, "Trainable filter storage INT16 (KB)": 457.25, "Trainable filter storage INT8 (KB)": 228.625, "Fused deploy real scalars": 234112, "Fused deploy storage FP32 (KB)": 914.5, "Fused deploy storage INT16 (KB)": 457.25, "Fused deploy storage INT8 (KB)": 228.625, "Trainable spectral param reduction vs point-wise (x)": 1.0, "Fused deploy storage reduction vs point-wise (x)": 1.0}
+
+----- Result row -----
+Method: GFNet-style point-wise
+Repeat: 0
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 1.0336
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 14.4805
+Peak GPU Mem bs=1 (MB): 15.5791
+GPU Latency bs=2048 (ms/img): 0.2898
+GPU Batch Latency bs=2048 (ms/batch): 593.5348
+GPU Throughput bs=2048 (img/s): 3450.5135
+Spectral Filter Params: 234112
+Filter Storage (KB, FP32): 914.5000
+Coeff. Access Pattern: one coefficient per channel-frequency point
+Trainable spectral real scalars: 234112
+Trainable filter storage FP32 (KB): 914.5000
+Trainable filter storage INT16 (KB): 457.2500
+Trainable filter storage INT8 (KB): 228.6250
+Fused deploy real scalars: 234112
+Fused deploy storage FP32 (KB): 914.5000
+Fused deploy storage INT16 (KB): 457.2500
+Fused deploy storage INT8 (KB): 228.6250
+Trainable spectral param reduction vs point-wise (x): 1.0000
+Fused deploy storage reduction vs point-wise (x): 1.0000
+
+Cooling down for 60 seconds...
+
+
+========== RUN GFNet-style point-wise repeat1 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_pointwise_seed0\deploy_model_best_swa_acc82.1200.pt
+RESULT_JSON {"Method": "GFNet-style point-wise", "Repeat": 1, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 1.033573, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 14.9344853515625, "Peak GPU Mem bs=1 (MB)": 15.5791015625, "GPU Latency bs=2048 (ms/img)": 0.2891835594177246, "GPU Batch Latency bs=2048 (ms/batch)": 592.2479296875, "GPU Throughput bs=2048 (img/s)": 3458.0112438394312, "Spectral Filter Params": 234112, "Filter Storage (KB, FP32)": 914.5, "Coeff. Access Pattern": "one coefficient per channel-frequency point", "Trainable spectral real scalars": 234112, "Trainable filter storage FP32 (KB)": 914.5, "Trainable filter storage INT16 (KB)": 457.25, "Trainable filter storage INT8 (KB)": 228.625, "Fused deploy real scalars": 234112, "Fused deploy storage FP32 (KB)": 914.5, "Fused deploy storage INT16 (KB)": 457.25, "Fused deploy storage INT8 (KB)": 228.625, "Trainable spectral param reduction vs point-wise (x)": 1.0, "Fused deploy storage reduction vs point-wise (x)": 1.0}
+
+----- Result row -----
+Method: GFNet-style point-wise
+Repeat: 1
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 1.0336
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 14.9345
+Peak GPU Mem bs=1 (MB): 15.5791
+GPU Latency bs=2048 (ms/img): 0.2892
+GPU Batch Latency bs=2048 (ms/batch): 592.2479
+GPU Throughput bs=2048 (img/s): 3458.0112
+Spectral Filter Params: 234112
+Filter Storage (KB, FP32): 914.5000
+Coeff. Access Pattern: one coefficient per channel-frequency point
+Trainable spectral real scalars: 234112
+Trainable filter storage FP32 (KB): 914.5000
+Trainable filter storage INT16 (KB): 457.2500
+Trainable filter storage INT8 (KB): 228.6250
+Fused deploy real scalars: 234112
+Fused deploy storage FP32 (KB): 914.5000
+Fused deploy storage INT16 (KB): 457.2500
+Fused deploy storage INT8 (KB): 228.6250
+Trainable spectral param reduction vs point-wise (x): 1.0000
+Fused deploy storage reduction vs point-wise (x): 1.0000
+
+Cooling down for 60 seconds...
+
+
+========== RUN GFNet-style point-wise repeat2 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_pointwise_seed0\deploy_model_best_swa_acc82.1200.pt
+RESULT_JSON {"Method": "GFNet-style point-wise", "Repeat": 2, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 1.033573, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 14.3295078125, "Peak GPU Mem bs=1 (MB)": 15.5791015625, "GPU Latency bs=2048 (ms/img)": 0.29035634994506837, "GPU Batch Latency bs=2048 (ms/batch)": 594.6498046875, "GPU Throughput bs=2048 (img/s)": 3444.043845396138, "Spectral Filter Params": 234112, "Filter Storage (KB, FP32)": 914.5, "Coeff. Access Pattern": "one coefficient per channel-frequency point", "Trainable spectral real scalars": 234112, "Trainable filter storage FP32 (KB)": 914.5, "Trainable filter storage INT16 (KB)": 457.25, "Trainable filter storage INT8 (KB)": 228.625, "Fused deploy real scalars": 234112, "Fused deploy storage FP32 (KB)": 914.5, "Fused deploy storage INT16 (KB)": 457.25, "Fused deploy storage INT8 (KB)": 228.625, "Trainable spectral param reduction vs point-wise (x)": 1.0, "Fused deploy storage reduction vs point-wise (x)": 1.0}
+
+----- Result row -----
+Method: GFNet-style point-wise
+Repeat: 2
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 1.0336
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 14.3295
+Peak GPU Mem bs=1 (MB): 15.5791
+GPU Latency bs=2048 (ms/img): 0.2904
+GPU Batch Latency bs=2048 (ms/batch): 594.6498
+GPU Throughput bs=2048 (img/s): 3444.0438
+Spectral Filter Params: 234112
+Filter Storage (KB, FP32): 914.5000
+Coeff. Access Pattern: one coefficient per channel-frequency point
+Trainable spectral real scalars: 234112
+Trainable filter storage FP32 (KB): 914.5000
+Trainable filter storage INT16 (KB): 457.2500
+Trainable filter storage INT8 (KB): 228.6250
+Fused deploy real scalars: 234112
+Fused deploy storage FP32 (KB): 914.5000
+Fused deploy storage INT16 (KB): 457.2500
+Fused deploy storage INT8 (KB): 228.6250
+Trainable spectral param reduction vs point-wise (x): 1.0000
+Fused deploy storage reduction vs point-wise (x): 1.0000
+
+Cooling down for 60 seconds...
+
+
+========== RUN GFNet-style point-wise repeat3 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_pointwise_seed0\deploy_model_best_swa_acc82.1200.pt
+RESULT_JSON {"Method": "GFNet-style point-wise", "Repeat": 3, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 1.033573, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 16.3601669921875, "Peak GPU Mem bs=1 (MB)": 15.5791015625, "GPU Latency bs=2048 (ms/img)": 0.29070693969726563, "GPU Batch Latency bs=2048 (ms/batch)": 595.3678125, "GPU Throughput bs=2048 (img/s)": 3439.8903618928844, "Spectral Filter Params": 234112, "Filter Storage (KB, FP32)": 914.5, "Coeff. Access Pattern": "one coefficient per channel-frequency point", "Trainable spectral real scalars": 234112, "Trainable filter storage FP32 (KB)": 914.5, "Trainable filter storage INT16 (KB)": 457.25, "Trainable filter storage INT8 (KB)": 228.625, "Fused deploy real scalars": 234112, "Fused deploy storage FP32 (KB)": 914.5, "Fused deploy storage INT16 (KB)": 457.25, "Fused deploy storage INT8 (KB)": 228.625, "Trainable spectral param reduction vs point-wise (x)": 1.0, "Fused deploy storage reduction vs point-wise (x)": 1.0}
+
+----- Result row -----
+Method: GFNet-style point-wise
+Repeat: 3
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 1.0336
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 16.3602
+Peak GPU Mem bs=1 (MB): 15.5791
+GPU Latency bs=2048 (ms/img): 0.2907
+GPU Batch Latency bs=2048 (ms/batch): 595.3678
+GPU Throughput bs=2048 (img/s): 3439.8904
+Spectral Filter Params: 234112
+Filter Storage (KB, FP32): 914.5000
+Coeff. Access Pattern: one coefficient per channel-frequency point
+Trainable spectral real scalars: 234112
+Trainable filter storage FP32 (KB): 914.5000
+Trainable filter storage INT16 (KB): 457.2500
+Trainable filter storage INT8 (KB): 228.6250
+Fused deploy real scalars: 234112
+Fused deploy storage FP32 (KB): 914.5000
+Fused deploy storage INT16 (KB): 457.2500
+Fused deploy storage INT8 (KB): 228.6250
+Trainable spectral param reduction vs point-wise (x): 1.0000
+Fused deploy storage reduction vs point-wise (x): 1.0000
+
+Cooling down for 60 seconds...
+
+
+========== RUN GFNet-style point-wise repeat4 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_pointwise_seed0\deploy_model_best_swa_acc82.1200.pt
+RESULT_JSON {"Method": "GFNet-style point-wise", "Repeat": 4, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 1.033573, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 15.5793779296875, "Peak GPU Mem bs=1 (MB)": 15.5791015625, "GPU Latency bs=2048 (ms/img)": 0.29126123428344725, "GPU Batch Latency bs=2048 (ms/batch)": 596.5030078125, "GPU Throughput bs=2048 (img/s)": 3433.3439616850214, "Spectral Filter Params": 234112, "Filter Storage (KB, FP32)": 914.5, "Coeff. Access Pattern": "one coefficient per channel-frequency point", "Trainable spectral real scalars": 234112, "Trainable filter storage FP32 (KB)": 914.5, "Trainable filter storage INT16 (KB)": 457.25, "Trainable filter storage INT8 (KB)": 228.625, "Fused deploy real scalars": 234112, "Fused deploy storage FP32 (KB)": 914.5, "Fused deploy storage INT16 (KB)": 457.25, "Fused deploy storage INT8 (KB)": 228.625, "Trainable spectral param reduction vs point-wise (x)": 1.0, "Fused deploy storage reduction vs point-wise (x)": 1.0}
+
+----- Result row -----
+Method: GFNet-style point-wise
+Repeat: 4
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 1.0336
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 15.5794
+Peak GPU Mem bs=1 (MB): 15.5791
+GPU Latency bs=2048 (ms/img): 0.2913
+GPU Batch Latency bs=2048 (ms/batch): 596.5030
+GPU Throughput bs=2048 (img/s): 3433.3440
+Spectral Filter Params: 234112
+Filter Storage (KB, FP32): 914.5000
+Coeff. Access Pattern: one coefficient per channel-frequency point
+Trainable spectral real scalars: 234112
+Trainable filter storage FP32 (KB): 914.5000
+Trainable filter storage INT16 (KB): 457.2500
+Trainable filter storage INT8 (KB): 228.6250
+Fused deploy real scalars: 234112
+Fused deploy storage FP32 (KB): 914.5000
+Fused deploy storage INT16 (KB): 457.2500
+Fused deploy storage INT8 (KB): 228.6250
+Trainable spectral param reduction vs point-wise (x): 1.0000
+Fused deploy storage reduction vs point-wise (x): 1.0000
+
+========== SUMMARY ==========
+
+----- Summary row -----
+Method: GFNet-style point-wise
+Repeated Runs: 5
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 1.0336
+FLOPs (M, est.): 78.6604
+Spectral Filter Params: 234112
+Filter Storage (KB, FP32): 914.5000
+Coeff. Access Pattern: one coefficient per channel-frequency point
+Trainable spectral real scalars: 234112
+Trainable filter storage FP32 (KB): 914.5000
+Trainable filter storage INT16 (KB): 457.2500
+Trainable filter storage INT8 (KB): 228.6250
+Fused deploy real scalars: 234112
+Fused deploy storage FP32 (KB): 914.5000
+Fused deploy storage INT16 (KB): 457.2500
+Fused deploy storage INT8 (KB): 228.6250
+Trainable spectral param reduction vs point-wise (x): 1.0000
+Fused deploy storage reduction vs point-wise (x): 1.0000
+GPU Latency bs=1 mean (ms/img): 15.1368
+GPU Latency bs=1 std: 0.8390
+Peak GPU Mem bs=1 mean (MB): 15.5791
+Peak GPU Mem bs=1 std: 0.0000
+GPU Latency bs=2048 mean (ms/img): 0.2903
+GPU Latency bs=2048 std: 0.0008
+GPU Batch Latency bs=2048 mean (ms/batch): 594.4607
+GPU Batch Latency bs=2048 std: 1.6419
+GPU Throughput bs=2048 mean (img/s): 3445.1606
+GPU Throughput bs=2048 std: 9.5190
+
+Saved:
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_per_repeat_20260608_174038.csv
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_per_repeat_20260608_174038.json
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_per_repeat_20260608_174038.md
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_summary_20260608_174038.csv
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_summary_20260608_174038.json
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_summary_20260608_174038.md
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_per_repeat_latest.csv
+C:\Users\kangk\PycharmProjects\PythonProject4\controlled_deployment_comparison_summary_latest.csv
+(pytorch_env) PS C:\Users\kangk\PycharmProjects\PythonProject4> python test.py --choice 2
+
+========== RUN Ring-band SIMD repeat0 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_ring_seed0\deploy_model_best_ensemble_acc82.4300.pt
+RESULT_JSON {"Method": "Ring-band SIMD", "Repeat": 0, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 0.811429, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 14.6876259765625, "Peak GPU Mem bs=1 (MB)": 14.7470703125, "GPU Latency bs=2048 (ms/img)": 0.28859954833984375, "GPU Batch Latency bs=2048 (ms/batch)": 591.051875, "GPU Throughput bs=2048 (img/s)": 3465.0088877562566, "Spectral Filter Params": 11968, "Filter Storage (KB, FP32)": 46.75, "Coeff. Access Pattern": "SIMD-style cached deployment lanes with compact coefficient reuse", "Trainable spectral real scalars": 11968, "Trainable filter storage FP32 (KB)": 46.75, "Trainable filter storage INT16 (KB)": 23.375, "Trainable filter storage INT8 (KB)": 11.6875, "Fused deploy real scalars": 10048, "Fused deploy storage FP32 (KB)": 39.25, "Fused deploy storage INT16 (KB)": 19.625, "Fused deploy storage INT8 (KB)": 9.8125, "Trainable spectral param reduction vs point-wise (x)": 19.56149732620321, "Fused deploy storage reduction vs point-wise (x)": 23.29936305732484}
+
+----- Result row -----
+Method: Ring-band SIMD
+Repeat: 0
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 0.8114
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 14.6876
+Peak GPU Mem bs=1 (MB): 14.7471
+GPU Latency bs=2048 (ms/img): 0.2886
+GPU Batch Latency bs=2048 (ms/batch): 591.0519
+GPU Throughput bs=2048 (img/s): 3465.0089
+Spectral Filter Params: 11968
+Filter Storage (KB, FP32): 46.7500
+Coeff. Access Pattern: SIMD-style cached deployment lanes with compact coefficient reuse
+Trainable spectral real scalars: 11968
+Trainable filter storage FP32 (KB): 46.7500
+Trainable filter storage INT16 (KB): 23.3750
+Trainable filter storage INT8 (KB): 11.6875
+Fused deploy real scalars: 10048
+Fused deploy storage FP32 (KB): 39.2500
+Fused deploy storage INT16 (KB): 19.6250
+Fused deploy storage INT8 (KB): 9.8125
+Trainable spectral param reduction vs point-wise (x): 19.5615
+Fused deploy storage reduction vs point-wise (x): 23.2994
+
+Cooling down for 60 seconds...
+
+
+========== RUN Ring-band SIMD repeat1 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_ring_seed0\deploy_model_best_ensemble_acc82.4300.pt
+RESULT_JSON {"Method": "Ring-band SIMD", "Repeat": 1, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 0.811429, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 13.95173828125, "Peak GPU Mem bs=1 (MB)": 14.7470703125, "GPU Latency bs=2048 (ms/img)": 0.28860986709594727, "GPU Batch Latency bs=2048 (ms/batch)": 591.0730078125, "GPU Throughput bs=2048 (img/s)": 3464.8850022426773, "Spectral Filter Params": 11968, "Filter Storage (KB, FP32)": 46.75, "Coeff. Access Pattern": "SIMD-style cached deployment lanes with compact coefficient reuse", "Trainable spectral real scalars": 11968, "Trainable filter storage FP32 (KB)": 46.75, "Trainable filter storage INT16 (KB)": 23.375, "Trainable filter storage INT8 (KB)": 11.6875, "Fused deploy real scalars": 10048, "Fused deploy storage FP32 (KB)": 39.25, "Fused deploy storage INT16 (KB)": 19.625, "Fused deploy storage INT8 (KB)": 9.8125, "Trainable spectral param reduction vs point-wise (x)": 19.56149732620321, "Fused deploy storage reduction vs point-wise (x)": 23.29936305732484}
+
+----- Result row -----
+Method: Ring-band SIMD
+Repeat: 1
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 0.8114
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 13.9517
+Peak GPU Mem bs=1 (MB): 14.7471
+GPU Latency bs=2048 (ms/img): 0.2886
+GPU Batch Latency bs=2048 (ms/batch): 591.0730
+GPU Throughput bs=2048 (img/s): 3464.8850
+Spectral Filter Params: 11968
+Filter Storage (KB, FP32): 46.7500
+Coeff. Access Pattern: SIMD-style cached deployment lanes with compact coefficient reuse
+Trainable spectral real scalars: 11968
+Trainable filter storage FP32 (KB): 46.7500
+Trainable filter storage INT16 (KB): 23.3750
+Trainable filter storage INT8 (KB): 11.6875
+Fused deploy real scalars: 10048
+Fused deploy storage FP32 (KB): 39.2500
+Fused deploy storage INT16 (KB): 19.6250
+Fused deploy storage INT8 (KB): 9.8125
+Trainable spectral param reduction vs point-wise (x): 19.5615
+Fused deploy storage reduction vs point-wise (x): 23.2994
+
+Cooling down for 60 seconds...
+
+
+========== RUN Ring-band SIMD repeat2 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_ring_seed0\deploy_model_best_ensemble_acc82.4300.pt
+RESULT_JSON {"Method": "Ring-band SIMD", "Repeat": 2, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 0.811429, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 13.90148828125, "Peak GPU Mem bs=1 (MB)": 14.7470703125, "GPU Latency bs=2048 (ms/img)": 0.2884858322143555, "GPU Batch Latency bs=2048 (ms/batch)": 590.818984375, "GPU Throughput bs=2048 (img/s)": 3466.374734329981, "Spectral Filter Params": 11968, "Filter Storage (KB, FP32)": 46.75, "Coeff. Access Pattern": "SIMD-style cached deployment lanes with compact coefficient reuse", "Trainable spectral real scalars": 11968, "Trainable filter storage FP32 (KB)": 46.75, "Trainable filter storage INT16 (KB)": 23.375, "Trainable filter storage INT8 (KB)": 11.6875, "Fused deploy real scalars": 10048, "Fused deploy storage FP32 (KB)": 39.25, "Fused deploy storage INT16 (KB)": 19.625, "Fused deploy storage INT8 (KB)": 9.8125, "Trainable spectral param reduction vs point-wise (x)": 19.56149732620321, "Fused deploy storage reduction vs point-wise (x)": 23.29936305732484}
+
+----- Result row -----
+Method: Ring-band SIMD
+Repeat: 2
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 0.8114
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 13.9015
+Peak GPU Mem bs=1 (MB): 14.7471
+GPU Latency bs=2048 (ms/img): 0.2885
+GPU Batch Latency bs=2048 (ms/batch): 590.8190
+GPU Throughput bs=2048 (img/s): 3466.3747
+Spectral Filter Params: 11968
+Filter Storage (KB, FP32): 46.7500
+Coeff. Access Pattern: SIMD-style cached deployment lanes with compact coefficient reuse
+Trainable spectral real scalars: 11968
+Trainable filter storage FP32 (KB): 46.7500
+Trainable filter storage INT16 (KB): 23.3750
+Trainable filter storage INT8 (KB): 11.6875
+Fused deploy real scalars: 10048
+Fused deploy storage FP32 (KB): 39.2500
+Fused deploy storage INT16 (KB): 19.6250
+Fused deploy storage INT8 (KB): 9.8125
+Trainable spectral param reduction vs point-wise (x): 19.5615
+Fused deploy storage reduction vs point-wise (x): 23.2994
+
+Cooling down for 60 seconds...
+
+
+========== RUN Ring-band SIMD repeat3 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_ring_seed0\deploy_model_best_ensemble_acc82.4300.pt
+RESULT_JSON {"Method": "Ring-band SIMD", "Repeat": 3, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 0.811429, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 14.354134765625, "Peak GPU Mem bs=1 (MB)": 14.7470703125, "GPU Latency bs=2048 (ms/img)": 0.288721866607666, "GPU Batch Latency bs=2048 (ms/batch)": 591.3023828125, "GPU Throughput bs=2048 (img/s)": 3463.5409217510523, "Spectral Filter Params": 11968, "Filter Storage (KB, FP32)": 46.75, "Coeff. Access Pattern": "SIMD-style cached deployment lanes with compact coefficient reuse", "Trainable spectral real scalars": 11968, "Trainable filter storage FP32 (KB)": 46.75, "Trainable filter storage INT16 (KB)": 23.375, "Trainable filter storage INT8 (KB)": 11.6875, "Fused deploy real scalars": 10048, "Fused deploy storage FP32 (KB)": 39.25, "Fused deploy storage INT16 (KB)": 19.625, "Fused deploy storage INT8 (KB)": 9.8125, "Trainable spectral param reduction vs point-wise (x)": 19.56149732620321, "Fused deploy storage reduction vs point-wise (x)": 23.29936305732484}
+
+----- Result row -----
+Method: Ring-band SIMD
+Repeat: 3
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 0.8114
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 14.3541
+Peak GPU Mem bs=1 (MB): 14.7471
+GPU Latency bs=2048 (ms/img): 0.2887
+GPU Batch Latency bs=2048 (ms/batch): 591.3024
+GPU Throughput bs=2048 (img/s): 3463.5409
+Spectral Filter Params: 11968
+Filter Storage (KB, FP32): 46.7500
+Coeff. Access Pattern: SIMD-style cached deployment lanes with compact coefficient reuse
+Trainable spectral real scalars: 11968
+Trainable filter storage FP32 (KB): 46.7500
+Trainable filter storage INT16 (KB): 23.3750
+Trainable filter storage INT8 (KB): 11.6875
+Fused deploy real scalars: 10048
+Fused deploy storage FP32 (KB): 39.2500
+Fused deploy storage INT16 (KB): 19.6250
+Fused deploy storage INT8 (KB): 9.8125
+Trainable spectral param reduction vs point-wise (x): 19.5615
+Fused deploy storage reduction vs point-wise (x): 23.2994
+
+Cooling down for 60 seconds...
+
+
+========== RUN Ring-band SIMD repeat4 ==========
+
+Loading checkpoint: C:\Users\kangk\PycharmProjects\PythonProject4\exp_c100_ring_seed0\deploy_model_best_ensemble_acc82.4300.pt
+RESULT_JSON {"Method": "Ring-band SIMD", "Repeat": 4, "Backbone": "same BRFNet-T-style CIFAR-100 backbone", "Training Recipe": "same CIFAR-100 recipe", "Params (M)": 0.811429, "FLOPs (M, est.)": 78.660416, "GPU Latency bs=1 (ms/img)": 14.229197265625, "Peak GPU Mem bs=1 (MB)": 14.7470703125, "GPU Latency bs=2048 (ms/img)": 0.2891861915588379, "GPU Batch Latency bs=2048 (ms/batch)": 592.2533203125, "GPU Throughput bs=2048 (img/s)": 3457.9797693989817, "Spectral Filter Params": 11968, "Filter Storage (KB, FP32)": 46.75, "Coeff. Access Pattern": "SIMD-style cached deployment lanes with compact coefficient reuse", "Trainable spectral real scalars": 11968, "Trainable filter storage FP32 (KB)": 46.75, "Trainable filter storage INT16 (KB)": 23.375, "Trainable filter storage INT8 (KB)": 11.6875, "Fused deploy real scalars": 10048, "Fused deploy storage FP32 (KB)": 39.25, "Fused deploy storage INT16 (KB)": 19.625, "Fused deploy storage INT8 (KB)": 9.8125, "Trainable spectral param reduction vs point-wise (x)": 19.56149732620321, "Fused deploy storage reduction vs point-wise (x)": 23.29936305732484}
+
+----- Result row -----
+Method: Ring-band SIMD
+Repeat: 4
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 0.8114
+FLOPs (M, est.): 78.6604
+GPU Latency bs=1 (ms/img): 14.2292
+Peak GPU Mem bs=1 (MB): 14.7471
+GPU Latency bs=2048 (ms/img): 0.2892
+GPU Batch Latency bs=2048 (ms/batch): 592.2533
+GPU Throughput bs=2048 (img/s): 3457.9798
+Spectral Filter Params: 11968
+Filter Storage (KB, FP32): 46.7500
+Coeff. Access Pattern: SIMD-style cached deployment lanes with compact coefficient reuse
+Trainable spectral real scalars: 11968
+Trainable filter storage FP32 (KB): 46.7500
+Trainable filter storage INT16 (KB): 23.3750
+Trainable filter storage INT8 (KB): 11.6875
+Fused deploy real scalars: 10048
+Fused deploy storage FP32 (KB): 39.2500
+Fused deploy storage INT16 (KB): 19.6250
+Fused deploy storage INT8 (KB): 9.8125
+Trainable spectral param reduction vs point-wise (x): 19.5615
+Fused deploy storage reduction vs point-wise (x): 23.2994
+
+========== SUMMARY ==========
+
+----- Summary row -----
+Method: Ring-band SIMD
+Repeated Runs: 5
+Backbone: same BRFNet-T-style CIFAR-100 backbone
+Training Recipe: same CIFAR-100 recipe
+Params (M): 0.8114
+FLOPs (M, est.): 78.6604
+Spectral Filter Params: 11968
+Filter Storage (KB, FP32): 46.7500
+Coeff. Access Pattern: SIMD-style cached deployment lanes with compact coefficient reuse
+Trainable spectral real scalars: 11968
+Trainable filter storage FP32 (KB): 46.7500
+Trainable filter storage INT16 (KB): 23.3750
+Trainable filter storage INT8 (KB): 11.6875
+Fused deploy real scalars: 10048
+Fused deploy storage FP32 (KB): 39.2500
+Fused deploy storage INT16 (KB): 19.6250
+Fused deploy storage INT8 (KB): 9.8125
+Trainable spectral param reduction vs point-wise (x): 19.5615
+Fused deploy storage reduction vs point-wise (x): 23.2994
+GPU Latency bs=1 mean (ms/img): 14.2248
+GPU Latency bs=1 std: 0.3202
+Peak GPU Mem bs=1 mean (MB): 14.7471
+Peak GPU Mem bs=1 std: 0.0000
+GPU Latency bs=2048 mean (ms/img): 0.2887
+GPU Latency bs=2048 std: 0.0003
+GPU Batch Latency bs=2048 mean (ms/batch): 591.2999
+GPU Batch Latency bs=2048 std: 0.5598
+GPU Throughput bs=2048 mean (img/s): 3463.5579
+GPU Throughput bs=2048 std: 3.2756
